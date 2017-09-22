@@ -27,7 +27,14 @@ dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("org.springframework.boot:spring-boot-devtools")
+	compile("org.springframework.boot:spring-boot-starter-security")
+	compile("org.springframework.security:spring-security-web")
+	compile("org.springframework.security:spring-security-config")
+	compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
+	runtime('com.h2database:h2')
+	runtime('mysql:mysql-connector-java')
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -2,16 +2,19 @@ package no.mabjork.finance_advisor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
+
 
 @SpringBootApplication
-public class FinanceAdvisorApplication {
+public class FinanceAdvisorApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(FinanceAdvisorApplication.class);
+	}
+
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(FinanceAdvisorApplication.class, args);
 	}
 
