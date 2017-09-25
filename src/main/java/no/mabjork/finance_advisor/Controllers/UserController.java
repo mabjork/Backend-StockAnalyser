@@ -1,7 +1,6 @@
 package no.mabjork.finance_advisor.Controllers;
 
-import io.jsonwebtoken.Jwts;
-import no.mabjork.finance_advisor.Models.User;
+import no.mabjork.finance_advisor.Models.Account;
 import no.mabjork.finance_advisor.Services.UserServiceImpl;
 import no.mabjork.finance_advisor.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/users")
@@ -24,12 +22,12 @@ public class UserController {
     private UserServiceImpl userService;
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        applicationUserRepository.save(user);
+    public void signUp(@RequestBody Account account) {
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        applicationUserRepository.save(account);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody User login) throws ServletException {
+    public ResponseEntity login(@RequestBody Account login) throws ServletException {
 
         String jwtToken = "lols";
         /*
@@ -40,10 +38,10 @@ public class UserController {
         String username = login.getUsername();
         String password = login.getPassword();
 
-        User user = userService.findByUsername(username);
+        Account user = userService.findByUsername(username);
 
         if (user == null) {
-            throw new ServletException("User email not found.");
+            throw new ServletException("Account email not found.");
         }
 
         String pwd = user.getPassword();

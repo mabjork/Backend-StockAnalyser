@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
-public class User implements Serializable{
+@Table(name = "accounts")
+public class Account implements Serializable{
 
     private Long id;
     private String username;

@@ -1,10 +1,10 @@
 package no.mabjork.finance_advisor.interfaces;
 
-import no.mabjork.finance_advisor.Models.User;
+import no.mabjork.finance_advisor.Models.Account;
 
 public interface UserService {
 
-    void save(User user);
+    void save(Account account);
 
-    User findByUsername(String username);
+    Account findByUsername(String username);
 }

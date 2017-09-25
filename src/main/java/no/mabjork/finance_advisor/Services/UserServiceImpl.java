@@ -1,6 +1,6 @@
 package no.mabjork.finance_advisor.Services;
 
-import no.mabjork.finance_advisor.Models.User;
+import no.mabjork.finance_advisor.Models.Account;
 import no.mabjork.finance_advisor.interfaces.UserService;
 import no.mabjork.finance_advisor.repositories.RoleRepository;
 import no.mabjork.finance_advisor.repositories.UserRepository;
@@ -19,14 +19,14 @@ public class UserServiceImpl implements UserService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(user);
+    public void save(Account account) {
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        account.setRoles(new HashSet<>(roleRepository.findAll()));
+        userRepository.save(account);
     }
 
     @Override
-    public User findByUsername(String username) {
+    public Account findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }
