@@ -21,37 +21,22 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping("/sign-up")
-    public void signUp(@RequestBody Account account) {
-        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
-        applicationUserRepository.save(account);
+    @PostMapping("/register")
+    public ResponseEntity signUp(@RequestBody Account account) {
+
+        if (validateUser(account)){
+            applicationUserRepository.save(account);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+
     }
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody Account login) throws ServletException {
 
-        String jwtToken = "lols";
-        /*
-        if (login.getUsername() == null || login.getPassword() == null) {
-            throw new ServletException("Please fill in username and password");
+    private boolean validateUser(Account account){
+        if (userService.userExists(account.getUsername())){
+            return false;
         }
-
-        String username = login.getUsername();
-        String password = login.getPassword();
-
-        Account user = userService.findByUsername(username);
-
-        if (user == null) {
-            throw new ServletException("Account email not found.");
-        }
-
-        String pwd = user.getPassword();
-
-        if (!password.equals(pwd)) {
-            throw new ServletException("Invalid login. Please check your name and password.");
-        }
-        */
-
-
-        return ResponseEntity.ok().build();
+        return true;
     }
+
 }

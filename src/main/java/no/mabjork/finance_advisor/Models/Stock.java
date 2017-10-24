@@ -21,6 +21,7 @@ public class Stock implements Serializable{
         this.symbol = symbol;
         this.sector = sector;
     }
+    public Stock(){}
 
     public void setId(Long id) {
         this.id = id;

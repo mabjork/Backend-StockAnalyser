@@ -1,6 +1,7 @@
 package no.mabjork.finance_advisor.auth;
 
 import io.jsonwebtoken.Jwts;
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import static no.mabjork.finance_advisor.SecurityConstants.SECRET;
 import static no.mabjork.finance_advisor.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+    static Logger log = Logger.getLogger(JWTAuthenticationFilter.class.getName());
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }
@@ -28,10 +30,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
 
+
         if (header == null || !header.startsWith(TOKEN_PREFIX)) {
+
             chain.doFilter(req, res);
             return;
         }
+
 
         UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
 

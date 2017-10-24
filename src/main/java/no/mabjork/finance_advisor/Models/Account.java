@@ -51,4 +51,12 @@ public class Account implements Serializable{
         this.roles = roles;
     }
 
+    public Account(String username,String password){
+        this.password = password;
+        this.username = username;
+    }
+    public Account(){
+
+    }
+
 }
