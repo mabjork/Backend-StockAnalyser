@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsername(username);
     }
     @Override
-    public boolean userExists(String username) {return userRepository.userExists(username);}
+    public boolean userExists(String username) {return false;}
 
     @Override
     public Iterable<Account> findAll(Sort sort) {

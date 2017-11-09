@@ -27,7 +27,7 @@ public class DatabaseLoader implements CommandLineRunner{
 
     @Override
     public void run(String... strings) throws Exception {
-        this.stockRepository.save(new Stock("Statoil","STE","Oil"));
+
 
         userService.save(new Account("lol","1234"));
 

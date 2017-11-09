@@ -33,10 +33,9 @@ public class UserController {
     }
 
     private boolean validateUser(Account account){
-        if (userService.userExists(account.getUsername())){
-            return false;
-        }
+
         return true;
     }
+
 
 }

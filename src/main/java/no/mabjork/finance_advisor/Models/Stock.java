@@ -2,6 +2,7 @@ package no.mabjork.finance_advisor.Models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "stock")
@@ -55,4 +56,6 @@ public class Stock implements Serializable{
     public String getSector() {
         return sector;
     }
+
+
 }

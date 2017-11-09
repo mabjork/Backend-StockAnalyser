@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import static no.mabjork.finance_advisor.SecurityConstants.HEADER_STRING;
 import static no.mabjork.finance_advisor.SecurityConstants.SECRET;
@@ -28,15 +29,15 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader(HEADER_STRING);
 
+        String header = req.getHeader(HEADER_STRING);
 
         if (header == null || !header.startsWith(TOKEN_PREFIX)) {
 
             chain.doFilter(req, res);
             return;
         }
-
+        log.info("Request passed");
 
         UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
 

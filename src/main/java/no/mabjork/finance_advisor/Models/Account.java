@@ -12,6 +12,7 @@ public class Account implements Serializable{
     private String username;
     private String password;
     private Set<Role> roles;
+    private Set<Stock> favorites;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +40,24 @@ public class Account implements Serializable{
         this.password = password;
     }
 
+    public void addFavorite(Stock stock){favorites.add(stock);}
 
+    @ManyToMany(targetEntity=Stock.class, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "user_favorites", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
+    public Set<Stock> getFavorites(){return favorites;}
+
+    public void removeFavorite(Stock stock){favorites.remove(stock);}
+
+    public void setFavorites(Set<Stock> favorites){this.favorites = favorites;}
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public Set<Role> getRoles() {
         return roles;
     }
+
+
+
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;

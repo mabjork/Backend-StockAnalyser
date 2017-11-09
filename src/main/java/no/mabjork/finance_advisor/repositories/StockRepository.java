@@ -18,8 +18,12 @@ import java.util.List;
 @Repository
 public interface StockRepository extends PagingAndSortingRepository<Stock,Long> {
     Stock findById(Long id);
-    List<Stock> getXfirst(int number);
+
+    Stock findBySymbol(String symbol);
     Iterable<Stock> findAll(Sort sort);
 
     Page<Stock> findAll(Pageable pageable);
+
+    Iterable<Stock> findAll();
 }
+

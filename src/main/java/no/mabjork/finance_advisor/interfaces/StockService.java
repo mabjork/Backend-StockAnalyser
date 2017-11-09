@@ -11,10 +11,14 @@ public interface StockService {
     void save(Stock stock);
 
     Stock findById(long id);
-
-    List<Stock> getXfirst(int number);
+    Stock findBySymbol(String symbol);
 
     Iterable<Stock> findAll(Sort sort);
 
     Page<Stock> findAll(Pageable pageable);
+
+    Iterable<Stock> findAll();
+
+    List<Stock> findAllMatching(String query);
+
 }

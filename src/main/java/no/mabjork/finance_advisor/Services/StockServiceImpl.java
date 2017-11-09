@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class StockServiceImpl implements StockService{
@@ -27,9 +28,10 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
-    public List<Stock> getXfirst(int number) {
-        return stockRepository.getXfirst(number);
+    public Stock findBySymbol(String symbol) {
+        return stockRepository.findBySymbol(symbol);
     }
+
 
     @Override
     public Iterable<Stock> findAll(Sort sort) {
@@ -40,4 +42,21 @@ public class StockServiceImpl implements StockService{
     public Page<Stock> findAll(Pageable pageable) {
         return stockRepository.findAll(pageable);
     }
+
+    @Override
+    public Iterable<Stock> findAll(){return stockRepository.findAll();}
+
+    @Override
+    public List<Stock> findAllMatching(String query) {
+
+        Iterable<Stock> all = stockRepository.findAll();
+        List<Stock> newList = new ArrayList<>();
+
+        for(Stock stock: all){
+            if (stock.getName().contains(query) | stock.getSymbol().contains(query) | stock.getSector().contains(query))newList.add(stock);
+        }
+        return newList;
+    }
+
+
 }

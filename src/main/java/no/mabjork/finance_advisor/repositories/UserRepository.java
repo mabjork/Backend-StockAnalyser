@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserRepository extends PagingAndSortingRepository<Account,Long> {
     Account findById(Long id);
     Account findByUsername(String name);
-    boolean userExists(String name);
     Iterable<Account> findAll(Sort sort);
     Page<Account> findAll(Pageable pageable);
 }
