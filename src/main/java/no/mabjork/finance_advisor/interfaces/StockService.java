@@ -21,4 +21,6 @@ public interface StockService {
 
     List<Stock> findAllMatching(String query);
 
+    Long countAll();
+
 }

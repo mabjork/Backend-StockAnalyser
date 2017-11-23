@@ -58,5 +58,10 @@ public class StockServiceImpl implements StockService{
         return newList;
     }
 
+    @Override
+    public Long countAll() {
+        return stockRepository.count();
+    }
+
 
 }

@@ -28,7 +28,7 @@ import java.util.Date;
 import static no.mabjork.finance_advisor.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    static Logger log = Logger.getLogger(JWTAuthenticationFilter.class.getName());
+    private static Logger log = Logger.getLogger(JWTAuthenticationFilter.class.getName());
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {

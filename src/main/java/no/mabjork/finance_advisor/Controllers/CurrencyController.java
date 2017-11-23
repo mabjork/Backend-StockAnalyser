@@ -4,6 +4,8 @@ package no.mabjork.finance_advisor.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.mabjork.finance_advisor.Models.DigitalCurrency;
 import no.mabjork.finance_advisor.Models.PhysicalCurrency;
+import no.mabjork.finance_advisor.Services.DigitalCurrencyServiceImpl;
+import no.mabjork.finance_advisor.Services.PhysicalCurrencyServiceImpl;
 import no.mabjork.finance_advisor.repositories.DigitalCurrencyRepository;
 import no.mabjork.finance_advisor.repositories.PhysicalCurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +24,17 @@ import java.io.IOException;
 public class CurrencyController {
 
     @Autowired
-    private PhysicalCurrencyRepository physicalCurrencyRepository;
+    private PhysicalCurrencyServiceImpl physicalCurrencyService;
 
     @Autowired
-    private DigitalCurrencyRepository digitalCurrencyRepository;
+    private DigitalCurrencyServiceImpl digitalCurrencyService;
 
     @Autowired
     private ObjectMapper mapper;
 
     @GetMapping("/physical")
     public ResponseEntity getPhysicalCurrencyPage(@RequestParam("page")int page,@RequestParam("pagelenght")int pagelenght){
-        Page<PhysicalCurrency> data = physicalCurrencyRepository.findAll(new PageRequest(page,pagelenght));
+        Page<PhysicalCurrency> data = physicalCurrencyService.findAll(new PageRequest(page,pagelenght));
         try{
             String json = mapper.writeValueAsString(data);
             return ResponseEntity.ok().body(json);
@@ -42,7 +44,7 @@ public class CurrencyController {
     }
     @GetMapping("/digital")
     public ResponseEntity getDigitalCurrencyPage(@RequestParam("page")int page,@RequestParam("pagelenght")int pagelenght){
-        Page<DigitalCurrency> data = digitalCurrencyRepository.findAll(new PageRequest(page,pagelenght));
+        Page<DigitalCurrency> data = digitalCurrencyService.findAll(new PageRequest(page,pagelenght));
         try{
             String json = mapper.writeValueAsString(data);
             return ResponseEntity.ok().body(json);

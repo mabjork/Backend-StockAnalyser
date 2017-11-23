@@ -23,9 +23,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void save(Account account) {
-        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
-        account.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(account);
+        if(!userExists(account.getUsername())){
+            account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+            account.setRoles(new HashSet<>(roleRepository.findAll()));
+            userRepository.save(account);
+        }
+
     }
 
     @Override
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsername(username);
     }
     @Override
-    public boolean userExists(String username) {return false;}
+    public boolean userExists(String username) {return findByUsername(username) != null;}
 
     @Override
     public Iterable<Account> findAll(Sort sort) {

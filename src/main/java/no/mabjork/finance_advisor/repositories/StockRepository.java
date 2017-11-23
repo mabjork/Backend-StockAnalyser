@@ -25,5 +25,6 @@ public interface StockRepository extends PagingAndSortingRepository<Stock,Long> 
     Page<Stock> findAll(Pageable pageable);
 
     Iterable<Stock> findAll();
+    Long countBySymbol(String symbol);
 }
 

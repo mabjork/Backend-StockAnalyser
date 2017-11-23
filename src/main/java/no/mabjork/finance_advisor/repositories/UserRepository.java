@@ -18,4 +18,5 @@ public interface UserRepository extends PagingAndSortingRepository<Account,Long>
     Account findByUsername(String name);
     Iterable<Account> findAll(Sort sort);
     Page<Account> findAll(Pageable pageable);
+
 }
